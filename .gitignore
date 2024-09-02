@@ -1,0 +1,2 @@
+# to not push API_KEY and API_SECRET
+.env
