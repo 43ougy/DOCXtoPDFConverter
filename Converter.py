@@ -7,6 +7,10 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+if (os.getenv("API_SECRET") == None or os.getenv("API_KEY") == None):
+    print("Missing API_KEY or API_SECRET")
+    exit()
+
 convertapi.api_secret = os.getenv("API_SECRET")
 convertapi.api_key = os.getenv("API_KEY")
 
@@ -62,6 +66,7 @@ def DirectoryConvert(directory: str) -> None:
 
 if (len(sys.argv) == 1):
     print("./converter [flag -d (path to convert directory)] ; [path to file] - [path to directory]")
+    exit()
 
 elif (len(sys.argv) >= 2):
     ManageConvertDir()
