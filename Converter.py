@@ -45,7 +45,13 @@ def ConvertToPdf(file: str, directory: str) -> None:
     if (os.path.isdir(directory) == True and os.path.exists(convertDir + '/' + new_file_path)):
         print("File already exist --> ", directory + '/' + new_file_path)
     else:
-        convertapi.convert('pdf', { 'File': file }, from_format='docx').save_files(directory)
+        print(file, " --> will be convert to pdf")
+        try:
+            convertapi.convert('pdf', { 'File': file }, from_format='docx').save_files(directory)
+        except convertapi.exceptions.ApiError as e:
+            print("API failed to convert '", file, "' to pdf")
+            print("Reason : ", e)
+            sys.exit(2)
         print(file, " --> convert to pdf")
 
 #function to recursivly go through directory and convert docx files
